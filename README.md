@@ -273,25 +273,30 @@ while True:
     if token == "@":
         skk.end()
         sys.exit()
-    menu = input("[0:無変換 1:ひらがな 2:カタカナ 3:変換 4:取り消し]:")
+    menu = input("[0:無変換 1:全角 2:ひらがな 3:カタカナ 4:変換 5:取り消し]:")
 
     # 無変換
     if menu == "0":
         word = token
         print("確定=", word)
         continue
-    # ひらがな
+    # 全角
     elif menu == "1":
+        word = skk.to_zenkaku(token)
+        print("確定=", word)
+        continue
+    # ひらがな
+    elif menu == "2":
         word = skk.to_hiragana(token)
         print("確定=", word)
         continue
     # カタカナ
-    elif menu == "2":        
+    elif menu == "3":        
         word = skk.to_katakana(token)
         print("確定=", word)
         continue
     # 変換
-    elif menu == "3":
+    elif menu == "4":
         kouho, gobi = skk.to_kouho(token)
         if kouho != None:
             print("候補 [ ",end="")
@@ -304,6 +309,7 @@ while True:
         else:
             print("該当なし", token)
                     
-    elif menu == "4":
+    elif menu == "5":
         pass
 ```
+
