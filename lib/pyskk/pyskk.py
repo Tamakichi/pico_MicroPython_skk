@@ -143,6 +143,16 @@ class skk:
             
         return new_token
 
+    # 半角=>全角変換
+    def to_zenkaku(self, token):
+        new_token = ""
+        for c in token:
+            if 0x21 <= ord(c) <= 0x7e:
+                c = chr(ord(c) + 65248)
+            elif ord(c) == 0x20:
+                c = '　'
+            new_token += c
+        return new_token
 
     # ローマ字=>片仮名変換
     def to_katakana(self, token):
