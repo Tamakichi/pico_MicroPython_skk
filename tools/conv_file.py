@@ -1,17 +1,30 @@
 # skkバイナリ辞書データファイルの作成
+# <SKK dictionary files>https://github.com/Tamakichi/pico_MicroPython_skkyより
+# 辞書ファイルSKK-JISYO.Mをダウンロードして、インデックス付きのバイナリデータに変換を行い、
+# 辞書ファイル ssk_dic_m.bin を生成する
 
+import os
 import skk
 import struct
+import requests
 
 # 定数
 SSK_BINDIC_FILE = "ssk_dic_m.bin"
+SKK_DIC_URL = "https://github.com/skk-dev/dict/raw/master/SKK-JISYO.M"
+SKK_DIC_FILE ='SKK-JISYO.M'
 
-# skk辞書のロード
-dic = skk.load_dic()
+# SKK辞書ファイルののダウンロード
+urlData = requests.get(SKK_DIC_URL).content
+with open(SKK_DIC_FILE ,mode='wb') as f:
+  f.write(urlData)
+
+# skk辞書を辞書型でロードする
+dic = skk.load_dic(SKK_DIC_FILE)
 
 # 辞書データをキーワードでソート
 new_dic = sorted(dic.items())
 
+# バイナリ辞書のインデックス部とデータ部の初期化
 keyword_index = bytearray()
 keyword_data = bytearray()
 
@@ -50,6 +63,6 @@ try:
 except Exception as e:
     print("File error",  e)
 
-
-
+# 元データの辞書ファイルの削除
+os.unlink(SKK_DIC_FILE)
 
