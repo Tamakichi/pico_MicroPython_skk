@@ -196,7 +196,7 @@ tokenで指定したローマ字に対応する変換候補のリストを取得
 >>> skk.begin()
 >>> skk.to_kouho("MiRu")
 (['見', '観', '診'], 'る')
->>> skk.jp_to_kouho("TaBeru")
+>>> skk.to_kouho("TaBeru")
 (['食'], 'べる')
 >>> skk.to_kouho("KaKu")
 (['書', '掛', '欠', '架', '駆', '懸'], 'く')
