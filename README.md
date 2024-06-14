@@ -142,6 +142,34 @@ skk.end()
 実行結果：  
 コンニチハ!  
 
+
+#### ■ 英数字・記号全角変換
+【書式】  
+`to_zenkaku(token)`
+
+【引数】  
+`token`: 変換対象文字列(英数字・記号)  
+
+【戻り値】  
+変換した文字列(文字列型)  
+
+【説明】  
+tokenで指定した半角英数字・記号を全角文字に変換します。  
+本関数を使うには、begin()関数による利用開始を行う必要があります。  
+
+【利用例】  
+```sample_zenkaku.py
+from pyskk import pyskk
+
+skk = pyskk.skk()
+skk.begin()
+print(skk.to_zenkaku("Hello,world!"))
+skk.end()
+```
+実行結果：  
+Ｈｅｌｌｏ，ｗｏｒｌｄ！  
+
+
 #### ■ 変換候補の取得
 【書式】  
 `to_kouho(token)`
@@ -196,7 +224,7 @@ tokenで指定したローマ字に対応する変換候補のリストを取得
 >>> skk.begin()
 >>> skk.to_kouho("MiRu")
 (['見', '観', '診'], 'る')
->>> skk.to_kouho("TaBeru")
+>>> skk.jp_to_kouho("TaBeru")
 (['食'], 'べる')
 >>> skk.to_kouho("KaKu")
 (['書', '掛', '欠', '架', '駆', '懸'], 'く')
