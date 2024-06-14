@@ -129,7 +129,7 @@ class skk:
         return keyword
  
     # ローマ字=>ひらがな変換
-    def romaji_to_hiragana(self, token):
+    def to_hiragana(self, token):
         return Romaji.toKana(token)
 
 
@@ -145,20 +145,11 @@ class skk:
 
 
     # ローマ字=>片仮名変換
-    def romaji_to_katakana(self, token):
-        return self.hiragana_to_katakana(self.romaji_to_hiragana(token))
-
-    # 英単語辞書変換
-    def en_to_kouho(self, token):
-        i = self.find(token)
-        if i > 0:
-            kouho = self.get_keywordData(i)
-            return kouho[1:]
-        else:
-            return None
+    def to_katakana(self, token):
+        return self.hiragana_to_katakana(self.to_hiragana(token))
 
     # 日本語辞書変換(送り対応)
-    def jp_to_kouho(self, token):
+    def to_kouho(self, token):
         keyword,okuri = self.splitOkuri(token)
         kana = Romaji.toKana(token)
 
@@ -179,8 +170,12 @@ class skk:
                 kouho = self.get_keywordData(i)
                 return kouho[1:], None
             else:
+                # 候補がない場合、英単語として検索を試みる
+                i = self.find(keyword)
+                if i > 0:
+                    kouho = self.get_keywordData(i)
+                    return kouho[1:], None                
                 return None, None
-
 
     # skk辞書変換利用開始
     def begin(self):
