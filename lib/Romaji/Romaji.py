@@ -32,7 +32,8 @@ class Romaji:
         "ya": "や", "yi": "い", "yu": "ゆ", "ye": "いぇ", "yo": "よ",
         "ra": "ら", "ri": "り", "ru": "る", "re": "れ", "ro": "ろ",
         "rya": "りゃ", "ryi": "りぃ", "ryu": "りゅ", "rye": "りぇ", "ryo": "りょ",
-        "wa": "わ", "wi": "うぃ", "wu": "う", "we": "うぇ", "wo": "うぉ",
+        "wa": "わ", "wi": "うぃ", "wu": "う", "we": "うぇ", "wo": "を",
+        "wha":"うぁ", "whi":"うぃ", "whu":"う", "whe":"うぇ", "who":"うぉ",         
         "ga": "が", "gi": "ぎ", "gu": "ぐ", "ge": "げ", "go": "ご",
         "gya": "ぎゃ", "gyi": "ぎぃ", "gyu": "ぎゅ", "gye": "ぎぇ", "gyo": "ぎょ",
         "za": "ざ", "zi": "じ", "zu": "ず", "ze": "ぜ", "zo": "ぞ",
@@ -57,7 +58,7 @@ class Romaji:
     
     max_unit_len = max([len(k) for k in tree])
   
-    #カナ１モウラに変換できるローマ字の並びかどうかを判定する
+    #かな１文字に変換できるローマ字の並びかどうかを判定する
     @classmethod
     def isUnit(cls, tokens, s=0):
         for i in range(cls.max_unit_len,0,-1):
@@ -72,7 +73,7 @@ class Romaji:
                 return cls.tree[tokens[s:s+i]], s+i
         return "",s
 
-    #"ン"に変換すべきかどうかを判定する
+    #撥音"ん"に変換すべきかどうかを判定する
     @classmethod
     def isHatsuon(cls, tokens, s=0):
         if s >= len(tokens):
@@ -85,7 +86,7 @@ class Romaji:
     def getHatsuon(cls, tokens, s=0):
         return "ん", s+1
 
-    #"ッ"に変換すべきかどうかを判定する
+    #促音"っ"に変換すべきかどうかを判定する
     @classmethod
     def isSokuon(cls, tokens, s=0):
         if s+1 >= len(tokens):
